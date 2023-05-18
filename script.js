@@ -31,53 +31,18 @@ function addBookToLibrary(){
     let read_yes = document.getElementById('read-yes');
     let read_no = document.getElementById('read-no');
 
-    //console.log(toggle_read_button);
     if(read_yes.checked){
         this.read = "Yes";
     }else{
         this.read = "No";
     }
 
-    //console.log(`${title.value} and author is ${author.value}`);
     
     let newBook = new Book(`${title.value}`, `${author.value}`, `${pages.value}`, `${read}`);
 
     myLibrary.push(newBook);
     main_section.innerHTML = ""; //so the books don't display twice
     addBookToCard(myLibrary);
-
-    const toggle_read_button = [...document.querySelectorAll(".toggle-read")];
-    const newRead = [...document.querySelectorAll(".newRead")];
-
-    //Figure out how to fix Toggle Read when an Item is deleted and elements are shifted
-    Book.prototype.toggleReadFnc = function() {
-        toggle_read_button.forEach(button => {
-            button.addEventListener("click", () => {
-                const currentRead = newBook.read;
-                const indexToggle = button.getAttribute("data-button-number");
-
-                console.log(indexToggle); 
-                if(currentRead === "No"){
-                    newBook.read = "Yes";
-                    myLibrary.splice(indexToggle,1, newBook);
-                    newRead[indexToggle].textContent = "Yes";
-                }
-                else{
-                    newBook.read = "No";
-                    myLibrary.splice(indexToggle,1, newBook);
-                    newRead[indexToggle].textContent = "No";
-                    
-                }
-            });
-            
-        });
-    };
-
-    //console.log(tryingThis());
-    newBook.toggleReadFnc();
-    
-    //console.log(toggle_read_button);
-    //newBook.toggleRead();
     
 
     title.value = "";
@@ -119,12 +84,43 @@ function addBookToCard(libArray){
         toggleReadBtn.dataset.buttonNumber = i;
         newCard.append(toggleReadBtn);
 
-        //console.log(newCard);
         
-        console.log(Book.prototype);
+        
+        //console.log(Book.prototype);
         removeCard(newCard, myLibrary);
         
         main_section.append(newCard);
+
+        //console.log(newCard);
+        const toggle_read_button = [...document.querySelectorAll(".toggle-read")];
+        //const newRead = [...document.querySelectorAll(".newRead")];
+        
+    
+        Book.prototype.toggleReadFnc = function() {
+            toggle_read_button.forEach(button => {
+                button.addEventListener("click", () => {
+                    const currentRead = libArray[i].read;
+                    //console.log(currentRead);
+                    const indexToggle = button.getAttribute("data-button-number");
+
+                    //console.log(newRead); 
+                    if(currentRead === "No"){
+                        libArray[i].read = "Yes";
+                        myLibrary.splice(indexToggle,1, libArray[i]);
+                        newRead.textContent = "Yes";
+                    }
+                    else{
+                        libArray[i].read = "No";
+                        myLibrary.splice(indexToggle,1, libArray[i]);
+                        newRead.textContent = "No";
+                        
+                    }
+                });
+                
+            });
+    };
+
+        libArray[i].toggleReadFnc();
         
     }
 }
