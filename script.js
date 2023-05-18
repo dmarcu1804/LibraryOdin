@@ -1,0 +1,147 @@
+let myLibrary = [];
+let tryingThis;
+
+function Book(title, author, pages, read){
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.info = function(){
+        return title + " by " + author + ", " + pages + " pages, " + read;
+    }
+}
+
+const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'not read yet');
+//myLibrary.push(theHobbit);
+
+const form = document.getElementById('form-element');
+const main_section = document.getElementsByClassName('main-section')[0];
+
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    addBookToLibrary();
+});
+
+
+function addBookToLibrary(){
+    let title = document.getElementById('title');
+    let author = document.getElementById('author');
+    let pages = document.getElementById('pages');
+    let read_yes = document.getElementById('read-yes');
+    let read_no = document.getElementById('read-no');
+
+    //console.log(toggle_read_button);
+    if(read_yes.checked){
+        this.read = "Yes";
+    }else{
+        this.read = "No";
+    }
+
+    //console.log(`${title.value} and author is ${author.value}`);
+    
+    let newBook = new Book(`${title.value}`, `${author.value}`, `${pages.value}`, `${read}`);
+
+    myLibrary.push(newBook);
+    main_section.innerHTML = ""; //so the books don't display twice
+    addBookToCard(myLibrary);
+
+    const toggle_read_button = [...document.querySelectorAll(".toggle-read")];
+    const newRead = [...document.querySelectorAll(".newRead")];
+
+    //Figure out how to fix Toggle Read when an Item is deleted and elements are shifted
+    Book.prototype.toggleReadFnc = function() {
+        toggle_read_button.forEach(button => {
+            button.addEventListener("click", () => {
+                const currentRead = newBook.read;
+                const indexToggle = button.getAttribute("data-button-number");
+
+                console.log(indexToggle); 
+                if(currentRead === "No"){
+                    newBook.read = "Yes";
+                    myLibrary.splice(indexToggle,1, newBook);
+                    newRead[indexToggle].textContent = "Yes";
+                }
+                else{
+                    newBook.read = "No";
+                    myLibrary.splice(indexToggle,1, newBook);
+                    newRead[indexToggle].textContent = "No";
+                    
+                }
+            });
+            
+        });
+    };
+
+    //console.log(tryingThis());
+    newBook.toggleReadFnc();
+    
+    //console.log(toggle_read_button);
+    //newBook.toggleRead();
+    
+
+    title.value = "";
+    author.value = "";
+    pages.value = "";
+    read_yes.checked = false;
+    read_no.checked = false;
+}
+
+function addBookToCard(libArray){
+    for(let i = 0; i < libArray.length; i++){
+        const newCard = document.createElement("div");
+        newCard.classList.add("card");
+
+        newCard.dataset.bookNumber = i;
+
+        const newTitle = document.createElement("h1");
+        const newAuthor = document.createElement("p");
+        const newPages = document.createElement("p");
+        const newRead = document.createElement("p");
+        newRead.classList.add("newRead");
+
+
+        newTitle.textContent = libArray[i].title;
+        newAuthor.textContent = libArray[i].author;
+        newPages.textContent = libArray[i].pages;
+        newRead.textContent = libArray[i].read;
+
+
+        newCard.append(newTitle);
+        newCard.append(newAuthor);
+        newCard.append(newPages);
+        newCard.append(newRead);
+
+        //toggleRead(newCard, newRead);
+        const toggleReadBtn = document.createElement("button");
+        toggleReadBtn.textContent = "Toggle Read";
+        toggleReadBtn.classList.add("toggle-read");
+        toggleReadBtn.dataset.buttonNumber = i;
+        newCard.append(toggleReadBtn);
+
+        //console.log(newCard);
+        
+        console.log(Book.prototype);
+        removeCard(newCard, myLibrary);
+        
+        main_section.append(newCard);
+        
+    }
+}
+
+function removeCard(newCard, myLibrary){
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete Book";
+    newCard.append(deleteBtn);
+    
+    deleteBtn.addEventListener('click', () => {
+        const indexCard = newCard.getAttribute("data-book-number");
+        myLibrary.splice(indexCard,1);
+        main_section.innerHTML = "";
+        addBookToCard(myLibrary);
+    });
+    
+}
+
+
+//addBookToCard(myLibrary);
