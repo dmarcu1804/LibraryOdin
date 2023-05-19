@@ -128,6 +128,7 @@ function addBookToCard(libArray){
 function removeCard(newCard, myLibrary){
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete Book";
+    deleteBtn.classList.add("deleteBtn");
     newCard.append(deleteBtn);
     
     deleteBtn.addEventListener('click', () => {

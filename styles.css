@@ -4,35 +4,42 @@
     --cardMargin: 16px;
   }
   
-  html, body {
+/*   html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     font-family: Helvetica;
     width: 100%;
-  }
+  } */
   h1 {
     margin: 0;
-    padding: 8px 48px;
-    background: #333;
+    /* padding: 8px 38px; */
+    width:auto;
+    padding:10px 20px;
+    background: #453461;
     color: #fff;
-    font-size: 24px;
+    font-size: 30px;
+    width:198px;
+    text-align: center;
   }
 
   .card > p{
     margin: 0;
-    padding: 8px 65px;
-    background: #b4b1b1;
-    color: #6667cf;
-    font-size: 1rem;
-    
+    padding: 10px 65px;
+    background: #927f91;
+    color: #ffffff;
+    font-size: 1.3rem;
+    text-align: center;
+    margin-top:2px;
   }
+
 
   .main-section {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
   }
+
   .card {
     width: var(--cardWidth);
     height: var(--cardHeight);
@@ -43,8 +50,88 @@
     box-sizing: border-box;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
+
+/*     display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; */
   }
 
+  .deleteBtn{
+    background-color: rgb(245, 58, 58);
+    width: 45%;
+    color: white;
+    padding: 14px 20px;
+    /* margin: 8px 0; */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left:5px;
+
+  }
+
+  .deleteBtn:hover{
+    background-color: rgb(179, 49, 49);
+  }
+
+  .card button:first-of-type{ 
+    width: 45%;
+    background-color: #4e638f;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left:10px;
+  }
+
+  .card button:first-of-type:hover{
+    background-color: #3b4f79;
+  }
   .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+  input[type=text],  input[type=number]{
+    width:100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type=submit] {
+    width: 100%;
+    background-color: #4e638f;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .container{
+    border-radius: 5px;
+    background-color: #cfcde7;
+    padding: 20px;
+    width:500px;
+    display:flex;
+    justify-content: center;
+  }
+
+  form { 
+    margin: 0 auto; 
+    width:250px;
+  }
+
+  body{
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
